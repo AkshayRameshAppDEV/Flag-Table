@@ -14,8 +14,16 @@ class FlagImageDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareButton))
         if let flag = fImage {
             flagImage.image = flag
+        }
+    }
+    
+    @objc func shareButton() {
+        if let flag = fImage {
+            let actionVC = UIActivityViewController(activityItems: [flag], applicationActivities: nil)
+            present(actionVC, animated: true, completion: nil)
         }
     }
 }
