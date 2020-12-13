@@ -8,10 +8,23 @@
 import UIKit
 
 class ViewController: UITableViewController {
+    var flagPicsArray = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        let fileManager = FileManager.default // get file manager instance
+        let projectPath = Bundle.main.resourcePath! // project path where the app is located
+        do {
+            let contents = try fileManager.contentsOfDirectory(atPath: projectPath) // contents of the project
+            for content in contents {
+                if content.hasSuffix(".png") {
+                    flagPicsArray.append(content)
+                }
+            }
+        } catch {
+            print(error)
+        }
+        print(flagPicsArray)
     }
 
 
