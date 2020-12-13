@@ -38,5 +38,11 @@ class ViewController: UITableViewController {
         cell.imageView?.image = flagCellImage
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let flagDetailViewController = storyboard?.instantiateViewController(identifier: "FlagImageDetailView") as! FlagImageDetailViewController
+        flagDetailViewController.fImage = UIImage(named: flagPicsArray[indexPath.row])
+        navigationController?.pushViewController(flagDetailViewController, animated: true)
+    }
 }
 
