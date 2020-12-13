@@ -17,16 +17,26 @@ class ViewController: UITableViewController {
         do {
             let contents = try fileManager.contentsOfDirectory(atPath: projectPath) // contents of the project
             for content in contents {
-                if content.hasSuffix(".png") {
+                if content.hasSuffix("@2x.png") {
                     flagPicsArray.append(content)
                 }
             }
         } catch {
             print(error)
         }
-        print(flagPicsArray)
     }
-
-
+    
+    //number of rows in table
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return flagPicsArray.count
+    }
+    
+    // what content should be in each cell for the tableview with identifier cell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "flagImageCell", for: indexPath)
+        let flagCellImage = UIImage(named: flagPicsArray[indexPath.row])
+        cell.imageView?.image = flagCellImage
+        return cell
+    }
 }
 
